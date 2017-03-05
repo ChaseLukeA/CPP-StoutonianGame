@@ -23,23 +23,21 @@
 #ifndef STOUTONIAN_H
 #define STOUTONIAN_H
 
+#include "StoutonianType.h"
+
 using namespace std;
 
 class Stoutonian
 {
     public:
-        struct Range
-        {
-            public:
-                int low;
-                int high;
-        };
-
         Stoutonian();
-        Stoutonian(string name, int sharpness, int strength, int speed);
+        Stoutonian(StoutonianType type);
+        Stoutonian(StoutonianType type, string name, int sharpness, int strength, int speed);
         virtual ~Stoutonian();
 
         string getName() { return m_Name; }
+        StoutonianType getType() { return m_Type; }
+        void setType(StoutonianType type) { m_Type = type; }
         void setName(string val) { m_Name = val; }
         int getInitialMentalSharpness() { return m_InitialMentalSharpness; }
         void setInitialMentalSharpness(int val) { m_InitialMentalSharpness = val; }
@@ -49,8 +47,6 @@ class Stoutonian
         void setChallengeStrength(int val) { m_ChallengeStrength = val; }
         int getSpeed() { return m_Speed; }
         void setSpeed(int val) { m_Speed = val; }
-        Range getRange() { return m_Range; }
-        void setRange(int low, int high) { m_Range.low = low; m_Range.high = high; }
 
         void speak();
         void rest();
@@ -58,15 +54,16 @@ class Stoutonian
         void challenge(Stoutonian& opponent);
         bool recruit(Stoutonian& opponent);
 
-    protected:
-
     private:
+        StoutonianType m_Type;
         string m_Name;
         int m_InitialMentalSharpness;
         int m_ActualMentalSharpness;
         int m_ChallengeStrength;
         int m_Speed;
-        Range m_Range;
+
+        StoutonianType randomType();
+        void spawn(StoutonianType type);
 };
 
 #endif // STOUTONIAN_H

@@ -25,22 +25,21 @@
 #include "Stoutonian.h"
 #include "Names.h"
 
-// default constructor creates a Stoutonian with a randomly-generated name and stats
+// default constructor creates a Stoutonian with a randomly-generated type, name, and stats
 Stoutonian::Stoutonian()
 {
-    Names *names = Names::getInstance();
-
-    m_Name = names->randomName();
-    m_InitialMentalSharpness = (rand() % 5) * 10;
-    m_ChallengeStrength = (rand() % 10) * 5;
-    m_Speed = (rand() % 5) * 3;
-
-    m_ActualMentalSharpness = m_InitialMentalSharpness;
+    spawn(randomType());
 }
 
-// full constructor creates a Stoutonian with the provided name and stats
-Stoutonian::Stoutonian(string name, int sharpness, int strength, int speed)
-: m_Name(name), m_InitialMentalSharpness(sharpness), m_ChallengeStrength(strength), m_Speed(speed)
+// default constructor creates a Stoutonian with the specified StoutonianType and a randomly-generated name and stats
+Stoutonian::Stoutonian(StoutonianType type)
+{
+    spawn(type);
+}
+
+// full constructor creates a Stoutonian with the provided type, name, and stats
+Stoutonian::Stoutonian(StoutonianType type, string name, int sharpness, int strength, int speed)
+: m_Type(type), m_Name(name), m_InitialMentalSharpness(sharpness), m_ChallengeStrength(strength), m_Speed(speed)
 {
     m_ActualMentalSharpness = m_InitialMentalSharpness;
 }
@@ -51,8 +50,58 @@ Stoutonian::~Stoutonian()
     //dtor
 }
 
+StoutonianType Stoutonian::randomType()
+{
+    return static_cast<StoutonianType>(rand() % 3);
+}
+
+// creates a Stoutonian from the specified type; name and speed are randomly generated
+void Stoutonian::spawn(StoutonianType type)
+{
+    Names *names = Names::getInstance();
+
+    m_Type = type;
+    m_Name = names->randomName();
+
+    switch (type)
+    {
+    case GameDesigner:
+        m_InitialMentalSharpness = 30;
+        m_ChallengeStrength = 20;
+        m_Speed = (rand() % 10) + 10;
+        break;
+    case MathGenius:
+        m_InitialMentalSharpness = 40;
+        m_ChallengeStrength = 15;
+        m_Speed = (rand() % 10) + 10;
+        break;
+    case InfoTechGuru:
+        m_InitialMentalSharpness = 30;
+        m_ChallengeStrength = 15;
+        m_Speed = (rand() % 15) + 10;
+        break;
+    default: // in case we want the "Unknown" Stoutonian type
+        m_InitialMentalSharpness = ((rand() % 4) + 1) * 10;
+        m_ChallengeStrength = (rand() % 15) + 10;
+        m_Speed = (rand() % 15) + 10;
+    }
+
+    m_ActualMentalSharpness = m_InitialMentalSharpness;
+}
+
 void Stoutonian::speak()
 {
+    switch (m_Type)
+    {
+    case GameDesigner:
+        break;
+    case MathGenius:
+        break;
+    case InfoTechGuru:
+        break;
+    default:
+        break;
+    }
     if (m_InitialMentalSharpness < 20)
     {
         cout << "I " << m_Name << "! Me " << m_InitialMentalSharpness << " smart and I challenge with " << m_ChallengeStrength << "% of the strengths!" << endl;
@@ -86,5 +135,5 @@ void Stoutonian::challenge(Stoutonian& opponent)
 
 bool Stoutonian::recruit(Stoutonian& opponent)
 {
-
+    return true;
 }

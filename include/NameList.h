@@ -10,8 +10,9 @@
 //
 // NameList.h
 //
-// A class to hold list of names and provide functions to get a random name
-// from the list or to check for the existence of a name in the list
+// A class to hold list of names and provide functions to add a name to the
+// list (if its not already here), to  get a random name from the list,
+// or to check for the existence of a name in the list
 //
 // Instructor: Jocelyn Richardt
 // Assignment: StoutonianGame
@@ -27,6 +28,7 @@
 #include <string>
 #include <random>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -36,8 +38,13 @@ class NameList
         NameList() {};
         virtual ~NameList() {};
 
-        void add(string name) { m_Names.push_back(name); }
+        // add a name to the list if its not already there
+        void add(string name) { if (!this->contains(name)) m_Names.push_back(name); }
+
+        // get a random name from the list
         string randomName() { return m_Names[rand() % m_Names.size()]; }
+
+        // see if a name is in the list
         bool contains(string name) { return find(m_Names.begin(), m_Names.end(), name) != m_Names.end(); }
 
     private:

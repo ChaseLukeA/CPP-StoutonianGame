@@ -30,12 +30,6 @@
 
 using namespace std;
 
-
-// forward declarations --------------------------------------------------- //
-//NameList generateNameList(string filename);
-// end forward declarations ----------------------------------------------- //
-
-
 int main()
 {
     // set random seed for this program's instance
