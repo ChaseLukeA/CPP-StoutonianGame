@@ -68,25 +68,30 @@ void Stoutonian::spawn(StoutonianType type)
     case GameDesigner:
         m_InitialMentalSharpness = 30;
         m_ChallengeStrength = 20;
-        m_Speed = (rand() % 10) + 10;
+        m_Speed = random(10, 20);
         break;
     case MathGenius:
         m_InitialMentalSharpness = 40;
         m_ChallengeStrength = 15;
-        m_Speed = (rand() % 10) + 10;
+        m_Speed = random(10, 20);
         break;
     case InfoTechGuru:
         m_InitialMentalSharpness = 30;
         m_ChallengeStrength = 15;
-        m_Speed = (rand() % 15) + 10;
+        m_Speed = random(15, 25);
         break;
     default: // in case we want the "Unknown" Stoutonian type
-        m_InitialMentalSharpness = ((rand() % 4) + 1) * 10;
-        m_ChallengeStrength = (rand() % 15) + 10;
-        m_Speed = (rand() % 15) + 10;
+        m_InitialMentalSharpness = random(2, 4) * 10; // between 20 and 40
+        m_ChallengeStrength = random(2, 5) * 5; // between 10 and 25
+        m_Speed = random(10, 25);
     }
 
     m_ActualMentalSharpness = m_InitialMentalSharpness;
+}
+
+int Stoutonian::random(int low, int high)
+{
+    return rand() % high + low;
 }
 
 void Stoutonian::speak()
@@ -94,26 +99,59 @@ void Stoutonian::speak()
     switch (m_Type)
     {
     case GameDesigner:
+        cout << m_Name << " here, the best Game Designer in the universe! " << randomAction() << endl << "I'm the smartest Stoutonian with my Mental Sharpnesss of " << m_InitialMentalSharpness << " and I can deal " << m_ChallengeStrength << " hit points with ease.";
         break;
     case MathGenius:
+        cout << "Cower before the great Math Genius " << m_Name << "! " << randomAction() << endl << "I'm the sharpest of the Stoutonians with an MS of " << m_InitialMentalSharpness << " and a maximum " << m_ChallengeStrength << " hit point capability.";
         break;
     case InfoTechGuru:
+        cout << "I am " << m_Name << ", the IT Guru. No Stoutonian is better than me. " << randomAction() << endl << "My " << m_InitialMentalSharpness << " Mental Sharpness gives me " << m_ChallengeStrength << " hit points.";
         break;
     default:
+        cout << "This is " << m_Name << ", nerd extraordinaire. " << randomAction() << endl << "I have " << m_InitialMentalSharpness << " units of Mental Sharpness and " << m_ChallengeStrength << " maximum hit points I can deal.";
         break;
     }
-    if (m_InitialMentalSharpness < 20)
+}
+
+string Stoutonian::randomAction()
+{
+    int action = random(1, 15);
+    switch (action)
     {
-        cout << "I " << m_Name << "! Me " << m_InitialMentalSharpness << " smart and I challenge with " << m_ChallengeStrength << "% of the strengths!" << endl;
+    case 1:
+        return "*pushes glasses up nose*";
+    case 2:
+        return "*lurks out from the shadows*";
+    case 3:
+        return "*pats pocket proctor in shirt*";
+    case 4:
+        return "*squints menacingly*";
+    case 5:
+        return "*avoiding eye contact*";
+    case 6:
+        return "*combing hair over*";
+    case 7:
+        return "*loudly clears throat*";
+    case 8:
+        return "*quickly flips through pocketbook*";
+    case 9:
+        return "*annoyingly cackles*";
+    case 10:
+        return "*shiftily adjusts suspenders*";
+    case 11:
+        return "*raising voice*";
+    case 12:
+        return "*leaning to look past you*";
+    case 13:
+        return "*giving Vulcan salute*";
+    case 14:
+        return "*pulling earbud out of left ear*";
+    case 15:
+        return "*roundhouse kicking the air*";
+    default:
+        return "*raising eyebrow*";
     }
-    else if (m_InitialMentalSharpness < 35)
-    {
-        cout << "I am " << m_Name << "! I am quite smart with an IQ of " << m_InitialMentalSharpness << ". I can challenge with " << m_ChallengeStrength << "% of my strengths!" << endl;
-    }
-    else
-    {
-        cout << "Cower before the great " << m_Name << "! With my brilliant IQ of " << m_InitialMentalSharpness << ", I will crush you. I am " << m_ChallengeStrength << "% positive of this!" << endl;
-    }
+
 }
 
 void Stoutonian::rest()

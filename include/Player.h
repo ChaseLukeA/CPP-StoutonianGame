@@ -44,14 +44,10 @@ class Player
         void setPassword(string val) { m_Password = val; }
         LinkedList<Stoutonian> getStoutonians() { return m_Stoutonians; }
         void addStoutonian(Stoutonian stoutonian) { m_Stoutonians.addLast(stoutonian); }
-
-        bool hasSavedFile()
-        {
-            struct stat buffer;
-            return (stat ((m_Name + ".sav").c_str(), &buffer) == 0);
-        }
-        void getSavedFile();
         void generateInitialStoutonians();
+
+        bool hasSavedFile();
+        void getSavedFile();
         bool saveFile();
 
     protected:

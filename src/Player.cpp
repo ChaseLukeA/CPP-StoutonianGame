@@ -19,6 +19,7 @@
 //
 // ---------------------------------------------------------------------------
 
+#include <stdio.h>
 #include "Player.h"
 
 Player::Player()
@@ -29,4 +30,34 @@ Player::Player()
 Player::~Player()
 {
     //dtor
+}
+
+bool Player::hasSavedFile()
+{
+    struct stat buffer;
+    return (stat ((m_Name + ".sav").c_str(), &buffer) == 0);
+}
+
+void Player::getSavedFile()
+{
+
+}
+
+bool Player::saveFile()
+{
+    int i;
+    if (hasSavedFile())
+    {
+        i = rename((m_Name + ".sav").c_str(), (m_Name + ".old").c_str());
+    }
+    if (i == 0)
+    {
+        cout << "Successfully renamed!" << endl;
+        return true;
+    }
+    else
+    {
+        cout << "NOT renamed!" << endl;
+        return false;
+    }
 }

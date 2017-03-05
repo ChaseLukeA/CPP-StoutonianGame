@@ -36,10 +36,12 @@
 		</Compiler>
 		<Unit filename="include/LinkedList.h" />
 		<Unit filename="include/NameList.h" />
+		<Unit filename="include/Names.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Stoutonian.h" />
+		<Unit filename="include/StoutonianType.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/NameList.cpp" />
+		<Unit filename="src/Names.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Stoutonian.cpp" />
 		<Extensions>

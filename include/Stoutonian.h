@@ -49,6 +49,7 @@ class Stoutonian
         void setSpeed(int val) { m_Speed = val; }
 
         void speak();
+        string randomAction();
         void rest();
         bool runAway();
         void challenge(Stoutonian& opponent);
@@ -64,6 +65,7 @@ class Stoutonian
 
         StoutonianType randomType();
         void spawn(StoutonianType type);
+        int random(int low, int high);
 };
 
 #endif // STOUTONIAN_H

@@ -52,5 +52,9 @@ int main()
         (*itr).speak();
     }
 
+    Player player;
+    player.setName("luke");
+    player.saveFile();
+
     return 0;
 }
