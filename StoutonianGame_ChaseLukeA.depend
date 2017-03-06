@@ -55,3 +55,56 @@
 
 1488699218 c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\include\stoutoniantype.h
 
+1488748875 source:o:\users\shared\workspace\cpp-stoutoniangame\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<time.h>
+	<random>
+	"LinkedList.h"
+	"Stoutonian.h"
+	"Player.h"
+
+1488730063 o:\users\shared\workspace\cpp-stoutoniangame\include\linkedlist.h
+	<iostream>
+
+1488766312 o:\users\shared\workspace\cpp-stoutoniangame\include\stoutonian.h
+	"StoutonianType.h"
+
+1488730063 o:\users\shared\workspace\cpp-stoutoniangame\include\stoutoniantype.h
+
+1488748084 o:\users\shared\workspace\cpp-stoutoniangame\include\player.h
+	<string>
+	<sys/stat.h>
+	"LinkedList.h"
+	"Stoutonian.h"
+
+1488730063 source:o:\users\shared\workspace\cpp-stoutoniangame\src\names.cpp
+	<fstream>
+	"Names.h"
+
+1488730063 o:\users\shared\workspace\cpp-stoutoniangame\include\names.h
+	"NameList.h"
+
+1488730063 o:\users\shared\workspace\cpp-stoutoniangame\include\namelist.h
+	<vector>
+	<string>
+	<random>
+	<algorithm>
+	<iostream>
+
+1488766089 source:o:\users\shared\workspace\cpp-stoutoniangame\src\player.cpp
+	<stdio.h>
+	<vector>
+	<fstream>
+	<iostream>
+	<sstream>
+	<string>
+	"Player.h"
+
+1488763043 source:o:\users\shared\workspace\cpp-stoutoniangame\src\stoutonian.cpp
+	<iostream>
+	<random>
+	"Stoutonian.h"
+	"Names.h"
+

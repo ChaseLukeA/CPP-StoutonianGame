@@ -54,7 +54,15 @@ int main()
 
     Player player;
     player.setName("luke");
-    player.saveFile();
+    Stoutonian gd;
+    Stoutonian mg;
+    Stoutonian itg;
+
+    player.addStoutonian(gd);
+    player.addStoutonian(mg);
+    player.addStoutonian(itg);
+    player.getSavedFile();
+    //player.saveFile();
 
     return 0;
 }

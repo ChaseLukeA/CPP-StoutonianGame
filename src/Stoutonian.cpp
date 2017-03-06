@@ -50,6 +50,24 @@ Stoutonian::~Stoutonian()
     //dtor
 }
 
+void Stoutonian::setType(int type)
+{
+    switch (type)
+    {
+    case 0:
+        m_Type = GameDesigner;
+        break;
+    case 1:
+        m_Type = MathGenius;
+        break;
+    case 2:
+        m_Type = InfoTechGuru;
+        break;
+    default:
+        m_Type = Unknown;
+    }
+}
+
 StoutonianType Stoutonian::randomType()
 {
     return static_cast<StoutonianType>(rand() % 3);

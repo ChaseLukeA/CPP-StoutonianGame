@@ -35,9 +35,10 @@ class Stoutonian
         Stoutonian(StoutonianType type, string name, int sharpness, int strength, int speed);
         virtual ~Stoutonian();
 
-        string getName() { return m_Name; }
         StoutonianType getType() { return m_Type; }
         void setType(StoutonianType type) { m_Type = type; }
+        void setType(int type);
+        string getName() { return m_Name; }
         void setName(string val) { m_Name = val; }
         int getInitialMentalSharpness() { return m_InitialMentalSharpness; }
         void setInitialMentalSharpness(int val) { m_InitialMentalSharpness = val; }
