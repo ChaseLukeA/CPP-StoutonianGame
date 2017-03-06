@@ -56,51 +56,63 @@ Player::~Player()
     //dtor
 }
 
+void Player::generateInitialStoutonians()
+{
+    Stoutonian first(GameDesigner);
+    addStoutonian(first);
+
+    Stoutonian second(MathGenius);
+    addStoutonian(second);
+
+    Stoutonian third(InfoTechGuru);
+    addStoutonian(third);
+}
+
 bool Player::hasSavedFile()
 {
     struct stat buffer;
-    return (stat ((m_Name + ".sav").c_str(), &buffer) == 0);
+    return (stat((m_Name + ".sav").c_str(), &buffer) == 0);
 }
 
 void Player::getSavedFile()
 {
-    if (!hasSavedFile()) return;
+    // if no saved file, generate 3 Stoutonians
+    if (!hasSavedFile())
+    {
+        generateInitialStoutonians();
+        return;
+    }
 
-    //vector<vector<string>> data;
-    ifstream file(m_SaveFileName);
+    // get saved file with <player name>.sav
+    ifstream file((m_Name + ".sav").c_str());
 
     while (file)
     {
-        string s;
-        if (!getline( file, s )) break;
+        // read each line
+        string line;
+        if (!getline(file, line)) break;
 
-        istringstream iss(s);
+        istringstream iss(line);
         vector<string> stats;
 
+        // parse line into individual Stoutonian stats
         while (iss)
         {
             string stat;
             if (!getline(iss, stat, '|')) break;
-            cout << stat << endl;
             stats.push_back(stat);
         }
 
-        Stoutonian stoutonian;
-        stoutonian.setType(FromString<int>(stats[0]));
-        stoutonian.setName(stats[1]);
-        //stoutonian.setInitialMentalSharpness(FromString<int>(stats[2]));
-        //stoutonian.setChallengeStrength(FromString<int>(stats[3]));
-        //stoutonian.setSpeed(FromString<int>(stats[4]));
+        // recreate saved Stoutonian and add
+        Stoutonian stoutonian(
+            Stoutonian::typeFromInt(FromString<int>(stats[0])),
+            stats[1],
+            FromString<int>(stats[2]),
+            FromString<int>(stats[3]),
+            FromString<int>(stats[4])
+        );
         m_Stoutonians.addLast(stoutonian);
-
-        //data.push_back(stoutonian);
     }
-
-    if (!file.eof())
-    {
-        cerr << "Fooey!\n";
-    }
-
 }
 
 bool Player::saveFile()
@@ -108,18 +120,22 @@ bool Player::saveFile()
     // if save file already exists, temporarily rename to keep as backup
     if (hasSavedFile()) rename((m_Name + ".sav").c_str(), (m_Name + ".old").c_str());
 
+    // save the Stoutonians to file
     ofstream file;
     string filename = (m_Name + ".sav").c_str();
     file.open((m_Name + ".sav").c_str(), ios_base::out);
 
     for (LinkedList<Stoutonian>::Iterator itr = m_Stoutonians.begin(); itr != m_Stoutonians.end(); itr++)
     {
-        file << (*itr).getType() << "|" << (*itr).getName() << "|" << (*itr).getInitialMentalSharpness() << "|" << (*itr).getChallengeStrength() << "|" << (*itr).getSpeed() << endl;
+        file << (*itr).getType() << "|";
+        file << (*itr).getName() << "|";
+        file << (*itr).getInitialMentalSharpness() << "|";
+        file << (*itr).getChallengeStrength() << "|";
+        file << (*itr).getSpeed() << endl;
     }
 
-    file << "second file";
     file.close();
 
-    // if saved file exists, delete any existing .old file
+    // if backup saved file exists, delete it
     if (hasSavedFile()) remove((m_Name + ".old").c_str());
 }

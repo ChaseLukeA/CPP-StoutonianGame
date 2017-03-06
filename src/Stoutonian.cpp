@@ -44,27 +44,23 @@ Stoutonian::Stoutonian(StoutonianType type, string name, int sharpness, int stre
     m_ActualMentalSharpness = m_InitialMentalSharpness;
 }
 
-
 Stoutonian::~Stoutonian()
 {
     //dtor
 }
 
-void Stoutonian::setType(int type)
+StoutonianType Stoutonian::typeFromInt(int type)
 {
     switch (type)
     {
     case 0:
-        m_Type = GameDesigner;
-        break;
+        return GameDesigner;
     case 1:
-        m_Type = MathGenius;
-        break;
+        return MathGenius;
     case 2:
-        m_Type = InfoTechGuru;
-        break;
+        return InfoTechGuru;
     default:
-        m_Type = Unknown;
+        return Unknown;
     }
 }
 

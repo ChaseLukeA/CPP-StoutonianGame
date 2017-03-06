@@ -37,7 +37,6 @@ class Stoutonian
 
         StoutonianType getType() { return m_Type; }
         void setType(StoutonianType type) { m_Type = type; }
-        void setType(int type);
         string getName() { return m_Name; }
         void setName(string val) { m_Name = val; }
         int getInitialMentalSharpness() { return m_InitialMentalSharpness; }
@@ -48,6 +47,9 @@ class Stoutonian
         void setChallengeStrength(int val) { m_ChallengeStrength = val; }
         int getSpeed() { return m_Speed; }
         void setSpeed(int val) { m_Speed = val; }
+
+        static StoutonianType randomType();
+        static StoutonianType typeFromInt(int type);
 
         void speak();
         string randomAction();
@@ -64,7 +66,6 @@ class Stoutonian
         int m_ChallengeStrength;
         int m_Speed;
 
-        StoutonianType randomType();
         void spawn(StoutonianType type);
         int random(int low, int high);
 };

@@ -37,13 +37,7 @@ class Player
         virtual ~Player();
 
         string getName() { return m_Name; }
-        void setName(string val)
-        {
-            m_Name = val;
-            m_SaveFileName = (m_Name + ".sav").c_str();
-        }
-        string getPassword() { return m_Password; }
-        void setPassword(string val) { m_Password = val; }
+        void setName(string val) { m_Name = val; }
         LinkedList<Stoutonian> getStoutonians() { return m_Stoutonians; }
         void addStoutonian(Stoutonian stoutonian) { m_Stoutonians.addLast(stoutonian); }
         void generateInitialStoutonians();
@@ -52,13 +46,8 @@ class Player
         void getSavedFile();
         bool saveFile();
 
-    protected:
-
     private:
-        void backupFile(){};
         string m_Name;
-        string m_Password;
-        string m_SaveFileName;
         LinkedList<Stoutonian> m_Stoutonians;
 };
 

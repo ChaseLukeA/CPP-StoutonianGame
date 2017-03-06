@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1488728520 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\main.cpp
+1488780458 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\main.cpp
 	<iostream>
 	<fstream>
 	<vector>
@@ -12,20 +12,25 @@
 1488694713 c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\include\linkedlist.h
 	<iostream>
 
-1488728131 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\src\stoutonian.cpp
+1488780678 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\src\stoutonian.cpp
 	<iostream>
 	<random>
 	"Stoutonian.h"
 	"Names.h"
 
-1488725728 c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\include\stoutonian.h
+1488780677 c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\include\stoutonian.h
 	"StoutonianType.h"
 
-1488728572 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\src\player.cpp
+1488781026 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\src\player.cpp
 	<stdio.h>
+	<vector>
+	<fstream>
+	<iostream>
+	<sstream>
+	<string>
 	"Player.h"
 
-1488728312 c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\include\player.h
+1488781157 c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\include\player.h
 	<string>
 	<sys/stat.h>
 	"LinkedList.h"
