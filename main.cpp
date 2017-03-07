@@ -35,10 +35,7 @@ int main()
     Game game;
 
     game.getPlayer();
-
-    //game.getOpponent();
-
-    //game.play();
+    game.play();
 
 
     return 0;

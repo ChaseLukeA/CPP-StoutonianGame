@@ -50,9 +50,13 @@ class Stoutonian
 
         static StoutonianType randomType();
         static StoutonianType typeFromInt(int type);
+        static string randomAction();
+        static string randomAdjective();
+        static string getTypeName(StoutonianType type);
+
 
         void speak();
-        string randomAction();
+        string stats();
         void rest();
         bool runAway();
         void challenge(Stoutonian& opponent);
@@ -67,7 +71,7 @@ class Stoutonian
         int m_Speed;
 
         void spawn(StoutonianType type);
-        int random(int low, int high);
+        static int random(int low, int high);
 };
 
 #endif // STOUTONIAN_H

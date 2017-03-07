@@ -21,6 +21,7 @@
 // ---------------------------------------------------------------------------
 
 #include <iostream>
+#include <sstream>
 #include <random>
 #include "Stoutonian.h"
 #include "Names.h"
@@ -66,7 +67,7 @@ StoutonianType Stoutonian::typeFromInt(int type)
 
 StoutonianType Stoutonian::randomType()
 {
-    return static_cast<StoutonianType>(rand() % 3);
+    return static_cast<StoutonianType>(rand() % 4);
 }
 
 // creates a Stoutonian from the specified type; name and speed are randomly generated
@@ -113,18 +114,29 @@ void Stoutonian::speak()
     switch (m_Type)
     {
     case GameDesigner:
-        cout << m_Name << " here, the best Game Designer in the universe! " << randomAction() << endl << "I'm the smartest Stoutonian with my Mental Sharpnesss of " << m_InitialMentalSharpness << " and I can deal " << m_ChallengeStrength << " hit points with ease.";
+        cout << "    \"" << m_Name << " here, the best Game Designer in the universe!\" " << randomAction() << endl;
+        cout << "    \"I'm the smartest Stoutonian with my Mental Sharpnesss of " << m_InitialMentalSharpness << " and I can deal " << m_ChallengeStrength << " hit points with ease.\"";
         break;
     case MathGenius:
-        cout << "Cower before the great Math Genius " << m_Name << "! " << randomAction() << endl << "I'm the sharpest of the Stoutonians with an MS of " << m_InitialMentalSharpness << " and a maximum " << m_ChallengeStrength << " hit point capability.";
+        cout << "    \"Cower before the great Math Genius " << m_Name << "!\" " << randomAction() << endl;
+        cout << "    \"I'm the sharpest of the Stoutonians with an MS of " << m_InitialMentalSharpness << " and a maximum " << m_ChallengeStrength << " hit point capability.\"";
         break;
     case InfoTechGuru:
-        cout << "I am " << m_Name << ", the IT Guru. No Stoutonian is better than me. " << randomAction() << endl << "My " << m_InitialMentalSharpness << " Mental Sharpness gives me " << m_ChallengeStrength << " hit points.";
+        cout << "    \"I am " << m_Name << ", the IT Guru. No Stoutonian is better than me.\" " << randomAction() << endl;
+        cout << "    \"My " << m_InitialMentalSharpness << " Mental Sharpness gives me " << m_ChallengeStrength << " hit points.\"";
         break;
     default:
-        cout << "This is " << m_Name << ", nerd extraordinaire. " << randomAction() << endl << "I have " << m_InitialMentalSharpness << " units of Mental Sharpness and " << m_ChallengeStrength << " maximum hit points I can deal.";
+        cout << "    \"This is " << m_Name << ", nerd extraordinaire.\" " << randomAction() << endl;
+        cout << "    \"I have " << m_InitialMentalSharpness << " units of Mental Sharpness and " << m_ChallengeStrength << " maximum hit points I can deal.\"";
         break;
     }
+}
+
+string Stoutonian::stats()
+{
+    ostringstream ss;
+    ss << m_Name << "\t" << getTypeName(m_Type) << "\t    " << m_ActualMentalSharpness << "\t\t" << m_ChallengeStrength;
+    return ss.str();
 }
 
 string Stoutonian::randomAction()
@@ -165,7 +177,61 @@ string Stoutonian::randomAction()
     default:
         return "*raising eyebrow*";
     }
+}
 
+string Stoutonian::randomAdjective()
+{
+    int adjective = random(1, 15);
+    switch (adjective)
+    {
+    case 1:
+        return "average-looking";
+    case 2:
+        return "large";
+    case 3:
+        return "tattoed";
+    case 4:
+        return "heavy-set";
+    case 5:
+        return "short";
+    case 6:
+        return "muscular";
+    case 7:
+        return "lanky";
+    case 8:
+        return "slender";
+    case 9:
+        return "scruffy";
+    case 10:
+        return "stocky";
+    case 11:
+        return "tall";
+    case 12:
+        return "well-built";
+    case 13:
+        return "old, wrinkled";
+    case 14:
+        return "rosy-faced";
+    case 15:
+        return "hooded";
+    default:
+        return "squinty-eyed";
+    }
+}
+
+string Stoutonian::getTypeName(StoutonianType type)
+{
+    switch (type)
+    {
+    case GameDesigner:
+        return "Game Designer";
+    case MathGenius:
+        return "Math Genius";
+    case InfoTechGuru:
+        return "Info Tech Guru";
+    default:
+        return "Unknown";
+    }
 }
 
 void Stoutonian::rest()

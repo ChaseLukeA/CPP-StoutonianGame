@@ -11,16 +11,19 @@ class Game
         virtual ~Game();
 
         void getPlayer();
-        void getOpponent();
 
         void play();
-        void choose();
 
     protected:
 
     private:
         Player m_Player;
+        Stoutonian m_Opponent;
 
+        void getOpponent();
+        void listStoutonians();
+        Stoutonian getChoice();
+        bool wantToPlay();
 };
 
 #endif // GAME_H
