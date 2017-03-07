@@ -18,11 +18,13 @@ class Game
 
     private:
         Player m_Player;
+        Stoutonian m_ChosenOne;
         Stoutonian m_Opponent;
 
         void getOpponent();
         void listStoutonians();
-        Stoutonian getChoice();
+        void getChoice();
+        void startChallenge();
         bool wantToPlay();
 };
 

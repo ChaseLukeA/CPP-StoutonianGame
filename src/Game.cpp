@@ -77,8 +77,7 @@ void Game::listStoutonians()
 {
     int number = 0;
 
-    cout << endl << "Pick your Stoutonian to challenge with!" << endl;
-    cout << "\t\t\t\t\t  Mental     Challenge" << endl;
+    cout << endl << "\t\t\t\t\t  Mental     Challenge" << endl;
     cout << "   Name:\t\tType:\t\tSharpness:   Strength:" << endl;
 
     for (LinkedList<Stoutonian>::Iterator itr = m_Player.getStoutonians().begin(); itr != m_Player.getStoutonians().end(); itr++)
@@ -88,25 +87,27 @@ void Game::listStoutonians()
     }
 }
 
-Stoutonian Game::getChoice()
+void Game::getChoice()
 {
     int numberOfStoutonians = m_Player.getStoutonians().getSize();
-    int number = -1;
-    int choice = -1;
+    int choice = 0;
 
-    cout << "Enter the number of the Stoutonian you want to use: ";
+    cout << endl << "Enter the number of the Stoutonian you want to use: ";
 
-    while (choice < 0 || choice > numberOfStoutonians)
+    while (choice < 1 || choice > numberOfStoutonians)
     {
         cin >> choice;
-        if (choice < 0 || choice > numberOfStoutonians) cout << endl << "Invalid choice. Please choose again: ";
+        if (choice < 1 || choice > numberOfStoutonians) cout << endl << "Invalid choice. Please choose again: ";
     }
+    choice--;
 
-    for (LinkedList<Stoutonian>::Iterator itr = m_Player.getStoutonians().begin(); itr != m_Player.getStoutonians().end(); itr++)
-    {
-        number++;
-        if (number == choice) return (*itr);
-    }
+    m_ChosenOne = m_Player.getStoutonians().getElementAt(choice);
+    cout << endl << "Lets go " << m_ChosenOne.getName() << "!" << endl;
+}
+
+void Game::startChallenge()
+{
+    m_ChosenOne.challenge(m_Opponent);
 }
 
 void Game::play()
@@ -123,6 +124,8 @@ void Game::play()
 
         playGame = wantToPlay();
     }
+
+    cout << endl << "Goodbye!" << endl;
 }
 
 bool Game::wantToPlay()

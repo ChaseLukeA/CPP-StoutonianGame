@@ -96,6 +96,7 @@ class LinkedList
         Iterator begin() { return Iterator(m_Head); }
         Iterator end() { return Iterator(null); }
 
+        T getElementAt(int number);
         int getSize();
         bool isEmpty() const { return m_Head == null; }
         void print();
@@ -292,6 +293,21 @@ inline bool LinkedList<T>::removeAt(int position)
     delete current;
 
     return true;
+}
+
+template<class T>
+inline T LinkedList<T>::getElementAt(int number)
+{
+    T type;
+    int current = 0;
+
+    for (Iterator itr = this->begin(); itr != this->end(); itr++)
+    {
+        if (current == number) type = (*itr);
+        current++;
+    }
+
+    return type;
 }
 
 // Get the number of elements in the LinkedList
