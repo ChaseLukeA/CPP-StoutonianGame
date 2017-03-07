@@ -34,6 +34,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Game.h" />
 		<Unit filename="include/LinkedList.h" />
 		<Unit filename="include/NameList.h" />
 		<Unit filename="include/Names.h" />
@@ -41,6 +42,7 @@
 		<Unit filename="include/Stoutonian.h" />
 		<Unit filename="include/StoutonianType.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Names.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Stoutonian.cpp" />

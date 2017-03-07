@@ -20,13 +20,10 @@
 // ---------------------------------------------------------------------------
 
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <time.h>
 #include <random>
-#include "LinkedList.h"
-#include "Stoutonian.h"
-#include "Player.h"
+#include <time.h>
+#include "Game.h"
+
 
 using namespace std;
 
@@ -35,40 +32,14 @@ int main()
     // set random seed for this program's instance
     srand(time(NULL));
 
-    /*
-    LinkedList<Stoutonian> stoutonians;
+    Game game;
 
-    for (int j = 0; j < 10; j++)
-    {
-        Stoutonian st;
-        stoutonians.addLast(st);
-    }
+    game.getPlayer();
 
-    int stoutonianNumber = 0;
-    for (LinkedList<Stoutonian>::Iterator itr = stoutonians.begin();
-        itr != stoutonians.end(); itr++)
-    {
-        stoutonianNumber++;
-        cout << endl << "Stoutonian " << stoutonianNumber << ":" << endl;
-        (*itr).speak();
-    }
-    */
+    //game.getOpponent();
 
-    Player player;
-    player.setName("luke");
-    player.getSavedFile();
+    //game.play();
 
-    for (LinkedList<Stoutonian>::Iterator itr = player.getStoutonians().begin(); itr != player.getStoutonians().end(); itr++)
-    {
-        (*itr).speak();
-        cout << endl << endl;
-    }
-
-    Stoutonian st1(Stoutonian::randomType());
-    player.addStoutonian(st1);
-
-    player.saveFile();
-    //player.saveFile();
 
     return 0;
 }

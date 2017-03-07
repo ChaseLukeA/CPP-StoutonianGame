@@ -1,13 +1,9 @@
 # depslib dependency file v1.0
-1488780458 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\main.cpp
+1488852044 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\main.cpp
 	<iostream>
-	<fstream>
-	<vector>
-	<time.h>
 	<random>
-	"LinkedList.h"
-	"Stoutonian.h"
-	"Player.h"
+	<time.h>
+	"Game.h"
 
 1488694713 c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\include\linkedlist.h
 	<iostream>
@@ -21,7 +17,7 @@
 1488780677 c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\include\stoutonian.h
 	"StoutonianType.h"
 
-1488781026 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\src\player.cpp
+1488781325 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\src\player.cpp
 	<stdio.h>
 	<vector>
 	<fstream>
@@ -112,4 +108,16 @@
 	<random>
 	"Stoutonian.h"
 	"Names.h"
+
+1488851339 c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\include\game.h
+	"Player.h"
+
+1488852828 source:c:\users\chase\onedrive - university of wisconsin-stout\development\cpp\datastructures\stoutoniangame_chaselukea\src\game.cpp
+	"Game.h"
+	<iostream>
+	<fstream>
+	<vector>
+	"LinkedList.h"
+	"Stoutonian.h"
+	"Player.h"
 
