@@ -54,13 +54,12 @@ class Stoutonian
         static string randomAdjective();
         static string getTypeName(StoutonianType type);
 
-
         void speak();
-        string stats();
         void rest();
-        bool runAway();
-        void challenge(Stoutonian& opponent);
+        int challenge(Stoutonian& opponent);
         bool recruit(Stoutonian& opponent);
+        bool runAway();
+        bool defeated() { return m_ActualMentalSharpness <= 0; }
 
     private:
         StoutonianType m_Type;
@@ -70,6 +69,7 @@ class Stoutonian
         int m_ChallengeStrength;
         int m_Speed;
 
+        int hitPoints(int maxHitPoints);
         void spawn(StoutonianType type);
         static int random(int low, int high);
 };

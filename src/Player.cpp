@@ -76,12 +76,7 @@ bool Player::hasSavedFile()
 
 void Player::getSavedFile()
 {
-    // if no saved file, generate 3 Stoutonians
-    if (!hasSavedFile())
-    {
-        generateInitialStoutonians();
-        return;
-    }
+    int numberOfStoutonians = 0;
 
     // get saved file with <player name>.sav
     ifstream file((m_Name + ".sav").c_str());
@@ -90,9 +85,9 @@ void Player::getSavedFile()
     {
         // read each line
         string line;
-        if (!getline(file, line)) break;
+        if (!getline(file, line)) break; // exit if no more lines
 
-        istringstream iss(line);
+        istringstream iss(line); // read line into iss variable
         vector<string> stats;
 
         // parse line into individual Stoutonian stats
@@ -111,8 +106,11 @@ void Player::getSavedFile()
             FromString<int>(stats[3]),
             FromString<int>(stats[4])
         );
+        // add saved Stoutonian to list
         m_Stoutonians.addLast(stoutonian);
+        numberOfStoutonians++;
     }
+    cout << "Loaded " << numberOfStoutonians << " Stoutonians from file." << endl;
 }
 
 bool Player::saveFile()

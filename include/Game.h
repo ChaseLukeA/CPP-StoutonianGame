@@ -21,9 +21,10 @@ class Game
         Stoutonian m_ChosenOne;
         Stoutonian m_Opponent;
 
+        int getChoice(int numberOfChoices);
         void getOpponent();
         void listStoutonians();
-        void getChoice();
+        void chooseStoutonian();
         void startChallenge();
         bool wantToPlay();
 };

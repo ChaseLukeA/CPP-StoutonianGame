@@ -111,32 +111,82 @@ int Stoutonian::random(int low, int high)
 
 void Stoutonian::speak()
 {
+    cout << endl;
     switch (m_Type)
     {
     case GameDesigner:
-        cout << "    \"" << m_Name << " here, the best Game Designer in the universe!\" " << randomAction() << endl;
-        cout << "    \"I'm the smartest Stoutonian with my Mental Sharpnesss of " << m_InitialMentalSharpness << " and I can deal " << m_ChallengeStrength << " hit points with ease.\"";
+        cout << "\"" << m_Name << " here, the best Game Designer in the universe!\" " << randomAction() << endl;
+        cout << "\"I'm the smartest Stoutonian with my Mental Sharpnesss of " << m_InitialMentalSharpness << " and I can deal " << m_ChallengeStrength << " hit points with ease.\"";
         break;
     case MathGenius:
-        cout << "    \"Cower before the great Math Genius " << m_Name << "!\" " << randomAction() << endl;
-        cout << "    \"I'm the sharpest of the Stoutonians with an MS of " << m_InitialMentalSharpness << " and a maximum " << m_ChallengeStrength << " hit point capability.\"";
+        cout << "\"Cower before the great Math Genius " << m_Name << "!\" " << randomAction() << endl;
+        cout << "\"I'm the sharpest of the Stoutonians with an MS of " << m_InitialMentalSharpness << " and a maximum " << m_ChallengeStrength << " hit point capability.\"";
         break;
     case InfoTechGuru:
-        cout << "    \"I am " << m_Name << ", the IT Guru. No Stoutonian is better than me.\" " << randomAction() << endl;
-        cout << "    \"My " << m_InitialMentalSharpness << " Mental Sharpness gives me " << m_ChallengeStrength << " hit points.\"";
+        cout << "\"I am " << m_Name << ", the IT Guru. No Stoutonian is better than me.\" " << randomAction() << endl;
+        cout << "\"My " << m_InitialMentalSharpness << " Mental Sharpness gives me " << m_ChallengeStrength << " hit points.\"";
         break;
     default:
-        cout << "    \"This is " << m_Name << ", nerd extraordinaire.\" " << randomAction() << endl;
-        cout << "    \"I have " << m_InitialMentalSharpness << " units of Mental Sharpness and " << m_ChallengeStrength << " maximum hit points I can deal.\"";
+        cout << "\"This is " << m_Name << ", nerd extraordinaire.\" " << randomAction() << endl;
+        cout << "\"I have " << m_InitialMentalSharpness << " units of Mental Sharpness and " << m_ChallengeStrength << " maximum hit points I can deal.\"";
         break;
     }
+    cout << endl;
 }
 
-string Stoutonian::stats()
+void Stoutonian::rest()
 {
-    ostringstream ss;
-    ss << m_Name << "\t" << getTypeName(m_Type) << "\t    " << m_ActualMentalSharpness << "\t\t" << m_ChallengeStrength;
-    return ss.str();
+    cout << endl << m_Name << " enjoys a quick rest..." << endl;
+    m_ActualMentalSharpness = m_InitialMentalSharpness;
+}
+
+// deals hit points to the opponent's mental sharpness; returns the amount of hit points dealt
+int Stoutonian::challenge(Stoutonian& opponent)
+{
+    int hitTotal = 0;
+
+    switch (rand() % 4)
+    {
+    case 0:
+        hitTotal = m_ChallengeStrength;
+    case 1:
+        hitTotal = m_ChallengeStrength * 0.75;
+    case 2:
+        hitTotal = m_ChallengeStrength * 0.5;
+    case 3:
+        hitTotal = m_ChallengeStrength * 0.25;
+    }
+
+    m_ActualMentalSharpness-=hitTotal;
+    return hitTotal;
+}
+
+// success of recruiting an opponent Stoutonian; returns true if successful, false if not
+bool Stoutonian::recruit(Stoutonian& opponent)
+{
+    return rand() % 100 > 50;
+}
+
+// success of running away from opponent; returns true if successful, false if not
+bool Stoutonian::runAway()
+{
+    // 75% chance for successful run away
+    return rand() % 100 > 25;
+}
+
+int Stoutonian::hitPoints(int maxHitPoints)
+{
+    switch (rand() % 4)
+    {
+    case 0:
+        return maxHitPoints;
+    case 1:
+        return maxHitPoints * 0.75;
+    case 2:
+        return maxHitPoints * 0.5;
+    case 3:
+        return maxHitPoints * 0.25;
+    }
 }
 
 string Stoutonian::randomAction()
@@ -232,26 +282,4 @@ string Stoutonian::getTypeName(StoutonianType type)
     default:
         return "Unknown";
     }
-}
-
-void Stoutonian::rest()
-{
-    cout << m_Name << " is resting..." << endl;
-    m_ActualMentalSharpness = m_InitialMentalSharpness;
-}
-
-bool Stoutonian::runAway()
-{
-    // generates 0, 1, 2, or 3; 0 is the bottom 25% so returning > 0 to provide 75% runAway success
-    return rand() % 4 > 0;
-}
-
-void Stoutonian::challenge(Stoutonian& opponent)
-{
-
-}
-
-bool Stoutonian::recruit(Stoutonian& opponent)
-{
-    return true;
 }
