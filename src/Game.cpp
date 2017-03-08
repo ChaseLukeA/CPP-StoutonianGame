@@ -123,15 +123,27 @@ void Game::getOpponent()
 void Game::listStoutonians()
 {
     int number = 0;
+    string nameTabs;
+    string typeTabs;
 
     cout << endl << "Here are your Stoutonians: " << endl;
-    cout << "\t\t\t\t\t  Mental     Challenge" << endl;
-    cout << "   Name:\t\tType:\t\tSharpness:   Strength:" << endl;
+    cout << "\t\t\t\t\t\t  Mental     Challenge" << endl;
+    cout << "   Name:\t\t\tType:\t\tSharpness:   Strength:" << endl;
 
     while (number < m_Player.getStoutonians().getSize())
     {
         Stoutonian st = m_Player.getStoutonians().getElementAt(number);
-        cout << ++number << ") " << st.getName() << "\t" << Stoutonian::getTypeName(st.getType()) << "\t    " << st.getActualMentalSharpness() << "\t\t" << st.getChallengeStrength() << endl;
+        // set number of tabs after name for proper alignment
+        if (st.getName().length() < 21)
+            nameTabs = "\t\t";
+        else
+            nameTabs = "\t";
+        // set number of tabs after type for proper alignment
+        if (st.getType() == Unknown)
+            typeTabs = "\t\t";
+        else
+            typeTabs = "\t";
+        cout << ++number << ") " << st.getName() << nameTabs << Stoutonian::getTypeName(st.getType()) << typeTabs << "    " << st.getActualMentalSharpness() << "\t\t" << st.getChallengeStrength() << endl;
     }
 }
 
