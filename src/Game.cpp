@@ -1,3 +1,25 @@
+// ---------------------------------------------------------------------------
+//
+//                   University of Wisconsin-Stout
+//            Mathematics, Statistics & Computer Science
+//                 CS-244 Data Structures - Fall 2016
+//
+// This software is student work for CSS-244 Data Structures and may not
+// be copied except by the original author and instructor.
+// Copyright 2016
+//
+// Game.cpp
+//
+// The actual game with methods to get player, get opponents, get input, and
+// run the actual game scenarios
+//
+// Instructor: Jocelyn Richardt
+// Assignment: StoutonianGame
+// Author: Luke A Chase
+// Date: 03/01/2017
+//
+// ---------------------------------------------------------------------------
+
 #include "Game.h"
 #include <iostream>
 #include <fstream>
@@ -7,22 +29,10 @@
 #include "Stoutonian.h"
 #include "Player.h"
 
-inline void wait()
-{
-    std::string dummy;
-    std::cout << "Press Enter to continue..." << std::endl;
-    std::getline(std::cin, dummy);
-}
 
-Game::Game()
-{
-    //ctor
-}
+// forward declarations
+void printSeparator();
 
-Game::~Game()
-{
-    //dtor
-}
 
 void Game::getPlayer()
 {
@@ -35,7 +45,7 @@ void Game::getPlayer()
     cout << " \\  \\_______________________/  /" << endl;
     cout << "  \\___________________________/" << endl;
 
-    cout << "\nEnter your desired player name: " << endl;
+    cout << endl << "\nEnter your desired player name: ";
     cin >> name;
 
     m_Player.setName(name);
@@ -44,6 +54,14 @@ void Game::getPlayer()
     {
         cout << endl << "Loading " << name << "'s saved Stoutonians from file..." << endl;
         m_Player.getSavedFile();
+
+        // if player lost players last session and has less than 3, generate new ones up to three
+        while (m_Player.getStoutonians().getSize() < 3)
+        {
+            cout << endl << "You have less than 3 Stoutonian's saved. Recruiting a new Stoutonian to your team..." << endl;
+            Stoutonian st(Stoutonian::randomType());
+            m_Player.addStoutonian(st);
+        }
     }
     else
     {
@@ -51,7 +69,31 @@ void Game::getPlayer()
         m_Player.generateInitialStoutonians();
     }
 
-    cout << endl << "Done. Let the games begin!" << endl;
+    cout << endl << "Let the games begin!" << endl;
+    printSeparator();
+}
+
+void Game::start()
+{
+    bool play = true;
+
+    while (play)
+    {
+        getOpponent();
+
+        listStoutonians();
+
+        chooseStoutonian();
+
+        playGame();
+
+        play = wantToPlay();
+    }
+
+    cout << endl << "Saving " << m_Player.getName() << "'s Stoutonians to disk..." << endl;
+    m_Player.saveFile();
+
+    cout << endl << "Goodbye!" << endl;
 }
 
 int Game::getChoice(int numberOfChoices)
@@ -73,15 +115,17 @@ void Game::getOpponent()
     m_Opponent = opponent;
 
     cout << endl << "A " << Stoutonian::randomAdjective() << " figure steps from the shadows..." << endl;
+    cout << endl << "OPPONENT:" << endl;
     opponent.speak();
-    wait();
+    printSeparator();
 }
 
 void Game::listStoutonians()
 {
     int number = 0;
 
-    cout << endl << "\t\t\t\t\t  Mental     Challenge" << endl;
+    cout << endl << "Here are your Stoutonians: " << endl;
+    cout << "\t\t\t\t\t  Mental     Challenge" << endl;
     cout << "   Name:\t\tType:\t\tSharpness:   Strength:" << endl;
 
     while (number < m_Player.getStoutonians().getSize())
@@ -99,14 +143,15 @@ void Game::chooseStoutonian()
     cout << endl << "Enter the number of the Stoutonian you want to use: ";
 
     choice = getChoice(numberOfStoutonians) - 1;
+    m_SelectedStoutonian = choice;
 
     m_ChosenOne = m_Player.getStoutonians().getElementAt(choice);
 
-    system("cls");
     cout << endl << "Lets go " << m_ChosenOne.getName() << "!" << endl;
+    printSeparator();
 }
 
-void Game::startChallenge()
+void Game::playGame()
 {
     int choice;
     int hitTotal;
@@ -114,17 +159,22 @@ void Game::startChallenge()
     string yourDefeatMessage = "Your Stoutonian, " + m_ChosenOne.getName() + ", has been defeated. Game over.";
     string opponentsDefeatMessage = "You have defeated " + m_Opponent.getName() + ". You win!!!";
 
+    cout << endl << "YOU:" << endl;
     m_ChosenOne.speak();
 
     while (!gameOver)
     {
-        cout << endl << "Adversity is in front of you. What would you like to do?" << endl;
-        cout << "1) Challenge" << endl;
-        cout << "2) Recruit" << endl;
+        printSeparator();
+        cout << endl << m_Opponent.getName() << " stands opposing you, " << m_ChosenOne.getName() << ". What would you like to do?" << endl;
+        cout << "1) Challenge Them" << endl;
+        cout << "2) Recruit Them" << endl;
         cout << "3) Run Away!" << endl;
         cout << endl << "Enter your choice: ";
         choice = getChoice(3);
-        system("cls");
+        printSeparator();
+
+        // 10% of the time choose something else
+        if (rand() % 10 < 1) choice = 4;
 
         if (m_Opponent.getSpeed() > m_ChosenOne.getSpeed())
         {
@@ -157,7 +207,7 @@ void Game::startChallenge()
                     if (m_Opponent.getSpeed() < m_ChosenOne.getSpeed()) // is slower speed
                     {
                         hitTotal = m_Opponent.challenge(m_ChosenOne);
-                        cout << endl << "Your Stoutonian " << m_ChosenOne.getName() << "'s mental sharpness is dulled by " << hitTotal << " points!" << endl;
+                        cout << endl << m_Opponent.getName() << " counter-attacks! Your Stoutonian loses " << hitTotal << " mental sharpness points!" << endl;
 
                         if (m_ChosenOne.defeated()) // you are defeated
                         {
@@ -211,37 +261,28 @@ void Game::startChallenge()
                     cout << endl << "Well that was just sad. Game over!" << endl;
                     gameOver = true;
                 }
-                break;
             }
         }
     }
-}
 
-void Game::play()
-{
-    bool playGame = true;
-
-    while (playGame)
+    if (m_ChosenOne.defeated())
     {
-        getOpponent();
-
-        listStoutonians();
-
-        chooseStoutonian();
-
-        startChallenge();
-
-        playGame = wantToPlay();
+        m_Player.removeStoutonian(m_SelectedStoutonian);
     }
-
-    cout << endl << "Goodbye!" << endl;
 }
 
 bool Game::wantToPlay()
 {
     char choice;
+
+    printSeparator();
     cout << endl << "Would you like to keep playing? (y/n) ";
     cin >> choice;
-    cout << endl;
+    printSeparator();
     return choice == 'Y' || choice == 'y';
+}
+
+void printSeparator()
+{
+    cout << endl << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
 }

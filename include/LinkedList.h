@@ -8,9 +8,9 @@
 // be copied except by the original author and instructor.
 // Copyright 2016
 //
-// <filename>
+// LinkedList.h
 //
-// <class description>
+// My implementation of a Linked List
 //
 // Instructor: Jocelyn Richardt
 // Assignment: StoutonianGame

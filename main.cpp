@@ -8,9 +8,9 @@
 // be copied except by the original author and instructor.
 // Copyright 2016
 //
-// <filename>
+// main.cpp
 //
-// <class description>
+// The main program
 //
 // Instructor: Jocelyn Richardt
 // Assignment: StoutonianGame
@@ -35,7 +35,7 @@ int main()
     Game game;
 
     game.getPlayer();
-    game.play();
+    game.start();
 
 
     return 0;

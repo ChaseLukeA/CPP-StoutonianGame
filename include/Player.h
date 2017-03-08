@@ -8,9 +8,10 @@
 // be copied except by the original author and instructor.
 // Copyright 2016
 //
-// <filename>
+// Player.h
 //
-// <class description>
+// The player who is playing the game; player saves Stoutonains to file and
+// retrieves saved files
 //
 // Instructor: Jocelyn Richardt
 // Assignment: StoutonianGame
@@ -33,13 +34,14 @@ using namespace std;
 class Player
 {
     public:
-        Player();
-        virtual ~Player();
+        Player() {}
+        virtual ~Player() {}
 
         string getName() { return m_Name; }
         void setName(string val) { m_Name = val; }
         LinkedList<Stoutonian> getStoutonians() { return m_Stoutonians; }
         void addStoutonian(Stoutonian stoutonian) { m_Stoutonians.addLast(stoutonian); }
+        void removeStoutonian(int position) { m_Stoutonians.removeAt(position); }
         void generateInitialStoutonians();
 
         bool hasSavedFile();

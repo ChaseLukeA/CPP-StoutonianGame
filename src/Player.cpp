@@ -8,9 +8,10 @@
 // be copied except by the original author and instructor.
 // Copyright 2016
 //
-// <filename>
+// Player.cpp
 //
-// <class description>
+// The player who is playing the game; player saves Stoutonains to file and
+// retrieves saved files
 //
 // Instructor: Jocelyn Richardt
 // Assignment: StoutonianGame
@@ -27,34 +28,24 @@
 #include <string>
 #include "Player.h"
 
-
+// my helper functions
 template<typename T>
-std::string ToString(const T& v)
+std::string ToString(const T& value)
 {
-    std::ostringstream ss;
-    ss << v;
-    return ss.str();
+    std::ostringstream oss;
+    oss << value;
+    return oss.str();
 }
 
 template<typename T>
 T FromString(const std::string& str)
 {
-    std::istringstream ss(str);
-    T ret;
-    ss >> ret;
-    return ret;
+    std::istringstream iss(str);
+    T value;
+    iss >> value;
+    return value;
 }
 
-
-Player::Player()
-{
-    //ctor
-}
-
-Player::~Player()
-{
-    //dtor
-}
 
 void Player::generateInitialStoutonians()
 {
@@ -110,7 +101,7 @@ void Player::getSavedFile()
         m_Stoutonians.addLast(stoutonian);
         numberOfStoutonians++;
     }
-    cout << "Loaded " << numberOfStoutonians << " Stoutonians from file." << endl;
+    cout << endl << "Loaded " << numberOfStoutonians << " Stoutonians from file." << endl;
 }
 
 bool Player::saveFile()
